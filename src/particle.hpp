@@ -39,5 +39,14 @@ public:
 		{
 			other.react(*this);
 		}
+
+		// std::for_each(
+		// 	std::execution::par_unseq,
+		// 	others.begin(),
+		// 	others.end(),
+		// 	[&](auto &other)
+		// 	{
+		// 		other.react(*this);
+		// 	});
 	}
 };

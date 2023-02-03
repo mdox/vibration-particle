@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -std=c++17 -Wall -Wextra -O3 -march=native -fno-sized-deallocation
-LIBS = -lm -lGL -lglfw -lGLEW
+LIBS = -lm -lGL -lglfw -lGLEW -fopenmp
 
 SRC_DIR = src
 OBJ_DIR = obj

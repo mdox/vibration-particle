@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <execution>
 
+#include <omp.h>
+
 #include <glm/gtc/random.hpp>
 
 #include "particle.hpp"
@@ -15,15 +17,35 @@ public:
 
 	void update()
 	{
+		#pragma omp parallel for
 		for (auto &particle : particles)
 		{
 			particle.interact(particles);
 		}
 
+		// std::for_each(
+		// 	std::execution::par_unseq,
+		// 	particles.begin(),
+		// 	particles.end(),
+		// 	[&](auto &particle)
+		// 	{
+		// 		particle.interact(particles);
+		// 	});
+
+		#pragma omp parallel for
 		for (auto &particle : particles)
 		{
 			particle.update();
 		}
+
+		// std::for_each(
+		// 	std::execution::par_unseq,
+		// 	particles.begin(),
+		// 	particles.end(),
+		// 	[&](auto &particle)
+		// 	{
+		// 		particle.update();
+		// 	});
 	}
 
 	void init(int count)
