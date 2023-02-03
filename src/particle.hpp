@@ -30,7 +30,7 @@ public:
 		else if (r < 0.0001f)
 			d *= -1.0f;
 
-		velocity += d * G / r * r * glm::sqrt(r);
+		velocity += d * G * glm::length(other.color + color) / r * r * glm::sqrt(r);
 	}
 
 	void interact(std::vector<Particle> &others)

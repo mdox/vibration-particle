@@ -1,4 +1,5 @@
 #pragma once
 
-static const float G = 0.000001f;
-static const int particlesCount = 4000;
+static float G = 0.0001f;
+static const float StaticG = G;
+static const int particlesCount = 2000;

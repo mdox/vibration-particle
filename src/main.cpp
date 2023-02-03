@@ -1,3 +1,4 @@
+#include <ctime>
 
 #include "config.hpp"
 #include "window.hpp"
@@ -15,6 +16,8 @@ Program program;
 Manager manager;
 Visualizer visualizer;
 
+clock_t start;
+
 int main()
 {
 	window.draw = draw;
@@ -26,6 +29,7 @@ int main()
 	manager.init(particlesCount);
 	visualizer.init();
 
+	start = clock();
 	window.loop();
 
 	visualizer.quit();
@@ -37,6 +41,14 @@ int main()
 
 void draw()
 {
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	auto now = clock();
+	auto diff = now - start;
+	start = now;
+
+	G = StaticG * (diff / (float)CLOCKS_PER_SEC);
+
 	program.use();
 	visualizer.use(manager.particles);
 
@@ -55,4 +67,5 @@ void resize(GLFWwindow *window, int width, int height)
 {
 	(void)window;
 	glViewport(0, 0, width, height);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
