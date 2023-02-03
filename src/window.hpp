@@ -35,6 +35,8 @@ public:
 		glfwSetFramebufferSizeCallback(window, resize);
 
 		glEnable(GL_PROGRAM_POINT_SIZE);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	void loop()
@@ -49,7 +51,7 @@ public:
 			glfwSwapBuffers(window);
 			glfwPollEvents();
 		} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-				glfwWindowShouldClose(window) == 0);
+				 glfwWindowShouldClose(window) == 0);
 	}
 
 	void quit()

@@ -3,9 +3,9 @@
 precision mediump float;
 
 in vec3 vColor;
-
 out vec4 color;
 
 void main() {
-	color = vec4(vColor, 1.0);
+	float s = (1.0 - length((vec2(0.5, 0.5) - gl_PointCoord) * 2.0));
+	color = vec4(vColor, s);
 }
