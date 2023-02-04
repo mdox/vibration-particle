@@ -1,5 +1,5 @@
 #pragma once
 
-static float G = 0.0001f;
+static float G = 0.00001f;
 static const float StaticG = G;
-static const int particlesCount = 2000;
+static const int particlesCount = 500;

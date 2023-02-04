@@ -24,29 +24,30 @@ public:
 	{
 		auto d = other.position - position;
 		auto r = glm::dot(d, d);
+		auto m = glm::dot(other.color, color);
 
 		if (r < 0.0000000001f)
 			return;
-		else if (r < 0.0001f)
-			d *= -1.0f;
+		else if (r < m)
+			d *= -1.0f * m;
 
-		velocity += d * G * glm::length(other.color + color) / r * r * glm::sqrt(r);
+		velocity += d * G * m / r * r * glm::sqrt(r);
 	}
 
 	void interact(std::vector<Particle> &others)
 	{
-		for (auto &other : others)
-		{
-			other.react(*this);
-		}
+		// for (auto &other : others)
+		// {
+		// 	other.react(*this);
+		// }
 
-		// std::for_each(
-		// 	std::execution::par_unseq,
-		// 	others.begin(),
-		// 	others.end(),
-		// 	[&](auto &other)
-		// 	{
-		// 		other.react(*this);
-		// 	});
+		std::for_each(
+			std::execution::par_unseq,
+			others.begin(),
+			others.end(),
+			[&](auto &other)
+			{
+				other.react(*this);
+			});
 	}
 };

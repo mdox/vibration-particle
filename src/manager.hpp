@@ -54,7 +54,7 @@ public:
 
 		for (Particle &particle : particles)
 		{
-			particle.position = glm::diskRand(1.0f);
+			particle.position = glm::circularRand(0.5f) + glm::diskRand(0.125f);
 			particle.color = glm::vec3(0.5f, 0.5f, 0.5f) + glm::ballRand(0.25f);
 		}
 	}
