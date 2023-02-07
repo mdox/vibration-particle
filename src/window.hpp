@@ -23,11 +23,13 @@ public:
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_FALSE);
 
 		window = glfwCreateWindow(1024, 768, "Tutorial 01", NULL, NULL);
 		assert(window);
 
 		glfwMakeContextCurrent(window);
+		// glfwSwapInterval(1000 / 100);
 		glewExperimental = true;
 		assert(glewInit() == GLEW_OK);
 
@@ -46,7 +48,8 @@ public:
 			update();
 			draw();
 
-			glfwSwapBuffers(window);
+			// glfwSwapBuffers(window);
+			glFlush();
 			glfwPollEvents();
 		} while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 				 glfwWindowShouldClose(window) == 0);

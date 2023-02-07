@@ -7,6 +7,7 @@
 #include <omp.h>
 
 #include <glm/gtc/random.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 
 #include "particle.hpp"
 
@@ -52,10 +53,17 @@ public:
 	{
 		particles.resize(count);
 
+		int index = 0;
+
 		for (Particle &particle : particles)
 		{
-			particle.position = glm::circularRand(0.5f) + glm::diskRand(0.125f);
-			particle.color = glm::vec3(0.5f, 0.5f, 0.5f) + glm::ballRand(0.25f);
+			glm::vec3 pos3 = glm::rotateZ(glm::vec3(0.0f, 0.125f, 0.0f), glm::radians(360.0f * index / count));
+
+			index++;
+
+			particle.position = glm::vec2(pos3.x, pos3.y);
+			particle.velocity = glm::vec2(pos3.y, pos3.x) * 0.001f;
+			particle.color = glm::vec3(0.5f, 0.5f, 0.5f) + glm::ballRand(0.5f);
 		}
 	}
 };

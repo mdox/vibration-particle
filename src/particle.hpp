@@ -24,7 +24,7 @@ public:
 	{
 		auto d = other.position - position;
 		auto r = glm::dot(d, d);
-		auto m = glm::dot(other.color, color);
+		auto m = 0.0001f;
 
 		if (r < 0.0000000001f)
 			return;
